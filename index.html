@@ -1,0 +1,1646 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>أمان رقمي</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-orange: #FF6B35;
+            --secondary-yellow: #F7C948;
+            --accent-white: #FFFFFF;
+            --dark-text: #2D3748;
+            --light-bg: #FFF9F0;
+            --light-orange: #FFE8DC;
+            --medium-orange: #FFA07A;
+            --dark-orange: #E55A2B;
+            --shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            --shadow-hover: 0 8px 30px rgba(0, 0, 0, 0.12);
+            --transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            --border-radius: 16px;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            background-color: var(--light-bg);
+            color: var(--dark-text);
+            line-height: 1.7;
+            font-family: 'Tajawal', sans-serif;
+            overflow-x: hidden;
+        }
+        
+        .container {
+            width: 92%;
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+        
+        /* Header Styles */
+        header {
+            background: linear-gradient(135deg, var(--primary-orange), var(--dark-orange));
+            color: var(--accent-white);
+            padding: 12px 0;
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+        }
+        
+        .header-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            flex-shrink: 0;
+        }
+        
+        .logo-icon {
+            font-size: 2.2rem;
+            background-color: var(--accent-white);
+            color: var(--primary-orange);
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            transition: var(--transition);
+        }
+        
+        .logo:hover .logo-icon {
+            transform: rotate(15deg) scale(1.05);
+        }
+        
+        .logo-text h1 {
+            font-size: 1.7rem;
+            margin-bottom: 5px;
+            font-weight: 800;
+        }
+        
+        .logo-text p {
+            font-size: 0.85rem;
+            opacity: 0.9;
+            font-weight: 400;
+        }
+        
+        nav {
+            flex: 1;
+            display: flex;
+            justify-content: flex-end;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            flex-wrap: wrap;
+            justify-content: flex-end;
+        }
+        
+        nav ul li {
+            margin: 0 8px;
+        }
+        
+        nav ul li a {
+            color: var(--accent-white);
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition);
+            padding: 10px 15px;
+            border-radius: 8px;
+            font-size: 1rem;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        nav ul li a::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--secondary-yellow);
+            transition: var(--transition);
+        }
+        
+        nav ul li a:hover::before {
+            width: 100%;
+        }
+        
+        nav ul li a:hover {
+            background-color: rgba(255,255,255,0.1);
+            transform: translateY(-2px);
+        }
+        
+        .mobile-menu {
+            display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--accent-white);
+            background: rgba(255,255,255,0.1);
+            width: 45px;
+            height: 45px;
+            border-radius: 8px;
+            justify-content: center;
+            align-items: center;
+            transition: var(--transition);
+        }
+        
+        .mobile-menu:hover {
+            background: rgba(255,255,255,0.2);
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1550751827-4bd374c3f58b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            color: var(--accent-white);
+            padding: 140px 0 100px;
+            text-align: center;
+            margin: 0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, var(--primary-orange) 10%, transparent 30%);
+            opacity: 0.1;
+            z-index: 0;
+        }
+        
+        .hero-content {
+            max-width: 900px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .hero h2 {
+            font-size: 3rem;
+            margin-bottom: 25px;
+            text-shadow: 0 2px 15px rgba(0,0,0,0.4);
+            font-weight: 800;
+            line-height: 1.2;
+        }
+        
+        .hero p {
+            font-size: 1.4rem;
+            margin-bottom: 40px;
+            opacity: 0.95;
+            font-weight: 400;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .btn-group {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 18px 38px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.15rem;
+            transition: var(--transition);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+            border: none;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(rgba(255,255,255,0.1), transparent);
+            transform: translateY(-100%);
+            transition: var(--transition);
+        }
+        
+        .btn:hover::before {
+            transform: translateY(0);
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary-orange), var(--dark-orange));
+            color: var(--accent-white);
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-5px) scale(1.03);
+            box-shadow: 0 10px 25px rgba(255,107,53,0.4);
+        }
+        
+        .btn-secondary {
+            background-color: transparent;
+            color: var(--accent-white);
+            border: 2px solid var(--accent-white);
+        }
+        
+        .btn-secondary:hover {
+            background-color: rgba(255,255,255,0.15);
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(255,255,255,0.2);
+        }
+        
+        /* Resources Section */
+        .resources-section {
+            padding: 80px 0;
+            background: linear-gradient(135deg, var(--light-bg), var(--accent-white));
+        }
+        
+        .resources-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .resource-card {
+            background: linear-gradient(135deg, var(--accent-white), var(--light-orange));
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            padding: 35px 30px;
+            transition: var(--transition);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            border: 2px solid transparent;
+        }
+        
+        .resource-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(255,107,53,0.05), transparent);
+            z-index: 0;
+        }
+        
+        .resource-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-hover);
+            border-color: var(--primary-orange);
+        }
+        
+        .resource-icon {
+            font-size: 3rem;
+            color: var(--primary-orange);
+            margin-bottom: 20px;
+            display: inline-block;
+            transition: var(--transition);
+            position: relative;
+            z-index: 1;
+        }
+        
+        .resource-card:hover .resource-icon {
+            transform: scale(1.1) rotate(5deg);
+        }
+        
+        .resource-card h3 {
+            color: var(--primary-orange);
+            margin-bottom: 15px;
+            font-size: 1.5rem;
+            font-weight: 700;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .resource-card p {
+            color: #555;
+            margin-bottom: 25px;
+            position: relative;
+            z-index: 1;
+            font-size: 1.05rem;
+        }
+        
+        .resource-source {
+            background: rgba(255,107,53,0.1);
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            color: var(--primary-orange);
+            margin-bottom: 20px;
+            display: inline-block;
+        }
+        
+        .resource-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: linear-gradient(135deg, var(--primary-orange), var(--dark-orange));
+            color: var(--accent-white);
+            padding: 12px 25px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition);
+            box-shadow: 0 4px 15px rgba(255,107,53,0.3);
+            position: relative;
+            z-index: 1;
+        }
+        
+        .resource-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(255,107,53,0.4);
+        }
+        
+        /* Content Sections */
+        .section {
+            padding: 100px 0;
+        }
+        
+        .section-header {
+            text-align: center;
+            margin-bottom: 70px;
+        }
+        
+        .section-header h2 {
+            color: var(--primary-orange);
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            position: relative;
+            display: inline-block;
+            font-weight: 800;
+        }
+        
+        .section-header h2::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            right: 50%;
+            transform: translateX(50%);
+            width: 100px;
+            height: 5px;
+            background: linear-gradient(to right, var(--secondary-yellow), var(--primary-orange));
+            border-radius: 3px;
+        }
+        
+        .section-header p {
+            max-width: 800px;
+            margin: 30px auto 0;
+            font-size: 1.2rem;
+            color: #666;
+            line-height: 1.8;
+        }
+        
+        .card {
+            background-color: var(--accent-white);
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            padding: 35px 30px;
+            transition: var(--transition);
+            height: 100%;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(255,107,53,0.1);
+        }
+        
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 5px;
+            height: 100%;
+            background: linear-gradient(to bottom, var(--primary-orange), var(--secondary-yellow));
+            transition: var(--transition);
+        }
+        
+        .card:hover {
+            transform: translateY(-12px);
+            box-shadow: var(--shadow-hover);
+        }
+        
+        .card:hover::before {
+            width: 8px;
+        }
+        
+        .card-icon {
+            font-size: 2.8rem;
+            color: var(--primary-orange);
+            margin-bottom: 25px;
+            display: inline-block;
+            transition: var(--transition);
+        }
+        
+        .card:hover .card-icon {
+            transform: scale(1.1) rotate(5deg);
+        }
+        
+        .card h3 {
+            color: var(--primary-orange);
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+        
+        .card p, .card ul {
+            color: #555;
+            font-size: 1.05rem;
+        }
+        
+        .card ul {
+            margin-right: 20px;
+            margin-top: 15px;
+        }
+        
+        .card ul li {
+            margin-bottom: 10px;
+            position: relative;
+        }
+        
+        .card ul li::before {
+            content: '•';
+            color: var(--primary-orange);
+            font-weight: bold;
+            display: inline-block;
+            width: 1em;
+            margin-right: 5px;
+        }
+        
+        /* Definition Section */
+        .definition-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 35px;
+        }
+        
+        /* Statistics Section */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .stat-card {
+            background: linear-gradient(135deg, var(--secondary-yellow), var(--primary-orange));
+            color: var(--accent-white);
+            padding: 35px 25px;
+            border-radius: var(--border-radius);
+            text-align: center;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(rgba(255,255,255,0.1), transparent);
+            transform: rotate(30deg);
+        }
+        
+        .stat-card:hover {
+            transform: translateY(-10px) scale(1.03);
+            box-shadow: var(--shadow-hover);
+        }
+        
+        .stat-card h3 {
+            color: var(--accent-white);
+            font-size: 3.2rem;
+            margin-bottom: 15px;
+            font-weight: 800;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .stat-card p {
+            font-size: 1.15rem;
+            opacity: 0.95;
+            font-weight: 500;
+            position: relative;
+            z-index: 1;
+        }
+        
+        /* Steps Section */
+        .steps-container {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+            max-width: 950px;
+            margin: 0 auto;
+        }
+        
+        .step {
+            display: flex;
+            align-items: flex-start;
+            gap: 25px;
+            background-color: var(--accent-white);
+            padding: 35px 30px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .step::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, rgba(255,107,53,0.03), transparent);
+            z-index: 0;
+        }
+        
+        .step:hover {
+            transform: translateX(15px);
+            box-shadow: var(--shadow-hover);
+        }
+        
+        .step-number {
+            background: linear-gradient(135deg, var(--primary-orange), var(--secondary-yellow));
+            color: var(--accent-white);
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.6rem;
+            font-weight: 800;
+            flex-shrink: 0;
+            position: relative;
+            z-index: 1;
+            box-shadow: 0 4px 12px rgba(255,107,53,0.3);
+        }
+        
+        .step-content {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .step-content h3 {
+            color: var(--primary-orange);
+            margin-bottom: 15px;
+            font-size: 1.4rem;
+            font-weight: 700;
+        }
+        
+        /* Laws Section */
+        .laws-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(370px, 1fr));
+            gap: 35px;
+        }
+        
+        .law-card {
+            background-color: var(--accent-white);
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            padding: 35px 30px;
+            border-top: 5px solid var(--primary-orange);
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .law-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(255,107,53,0.03), transparent);
+            z-index: 0;
+        }
+        
+        .law-card:hover {
+            transform: translateY(-12px);
+            box-shadow: var(--shadow-hover);
+        }
+        
+        .law-card h3 {
+            color: var(--primary-orange);
+            margin-bottom: 20px;
+            font-size: 1.4rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .law-card h3 i {
+            font-size: 1.3rem;
+        }
+        
+        .law-card .penalty {
+            background: linear-gradient(135deg, var(--light-orange), var(--accent-white));
+            padding: 15px 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+            font-weight: 700;
+            color: var(--dark-orange);
+            border-right: 4px solid var(--primary-orange);
+            position: relative;
+            z-index: 1;
+            box-shadow: 0 3px 10px rgba(255,107,53,0.1);
+        }
+        
+        /* Prevention Section */
+        .prevention-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .prevention-card {
+            background-color: var(--accent-white);
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            padding: 35px 30px;
+            transition: var(--transition);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .prevention-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(255,107,53,0.03), transparent);
+            z-index: 0;
+        }
+        
+        .prevention-card:hover {
+            transform: translateY(-12px);
+            box-shadow: var(--shadow-hover);
+        }
+        
+        .prevention-icon {
+            font-size: 2.8rem;
+            color: var(--primary-orange);
+            margin-bottom: 20px;
+            display: inline-block;
+            transition: var(--transition);
+            position: relative;
+            z-index: 1;
+        }
+        
+        .prevention-card:hover .prevention-icon {
+            transform: scale(1.15);
+        }
+        
+        .prevention-card h3 {
+            color: var(--primary-orange);
+            margin-bottom: 20px;
+            font-size: 1.4rem;
+            font-weight: 700;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .prevention-card p {
+            position: relative;
+            z-index: 1;
+        }
+        
+        /* Emergency Section */
+        .emergency-section {
+            background: linear-gradient(135deg, var(--primary-orange), var(--dark-orange));
+            color: var(--accent-white);
+            padding: 100px 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .emergency-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 150%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+        }
+        
+        .emergency-content {
+            max-width: 850px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .emergency-content h2 {
+            font-size: 2.8rem;
+            margin-bottom: 25px;
+            font-weight: 800;
+        }
+        
+        .emergency-content p {
+            font-size: 1.3rem;
+            margin-bottom: 40px;
+            opacity: 0.95;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .emergency-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 15px;
+            background-color: var(--accent-white);
+            color: var(--primary-orange);
+            padding: 22px 45px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 800;
+            font-size: 1.4rem;
+            transition: var(--transition);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .emergency-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(rgba(255,107,53,0.1), transparent);
+            transform: translateY(100%);
+            transition: var(--transition);
+        }
+        
+        .emergency-btn:hover::before {
+            transform: translateY(0);
+        }
+        
+        .emergency-btn:hover {
+            transform: scale(1.08);
+            box-shadow: 0 12px 30px rgba(0,0,0,0.3);
+        }
+        
+        /* Footer */
+        footer {
+            background: linear-gradient(135deg, #2D3748, #4A5568);
+            color: var(--accent-white);
+            padding: 80px 0 30px;
+            position: relative;
+        }
+        
+        footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(to right, var(--primary-orange), var(--secondary-yellow));
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+            gap: 50px;
+            margin-bottom: 50px;
+        }
+        
+        .footer-section h3 {
+            margin-bottom: 30px;
+            font-size: 1.5rem;
+            position: relative;
+            padding-bottom: 15px;
+            font-weight: 700;
+        }
+        
+        .footer-section h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 60px;
+            height: 3px;
+            background: var(--secondary-yellow);
+        }
+        
+        .footer-section p, .footer-section a {
+            color: rgba(255,255,255,0.85);
+            margin-bottom: 15px;
+            display: block;
+            text-decoration: none;
+            transition: var(--transition);
+            font-size: 1.05rem;
+        }
+        
+        .footer-section a:hover {
+            color: var(--secondary-yellow);
+            transform: translateX(8px);
+        }
+        
+        .campaign-note {
+            background: linear-gradient(135deg, var(--primary-orange), var(--secondary-yellow));
+            padding: 30px;
+            border-radius: var(--border-radius);
+            margin-top: 40px;
+            text-align: center;
+            font-style: italic;
+            font-size: 1.2rem;
+            box-shadow: var(--shadow);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .campaign-note::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(rgba(255,255,255,0.1), transparent);
+            transform: rotate(30deg);
+        }
+        
+        .campaign-note p {
+            position: relative;
+            z-index: 1;
+            margin: 0;
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255,255,255,0.15);
+            font-size: 1rem;
+            color: rgba(255,255,255,0.7);
+        }
+        
+        /* Back to Top Button */
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            left: 30px;
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--primary-orange), var(--dark-orange));
+            color: var(--accent-white);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            box-shadow: 0 4px 15px rgba(255,107,53,0.4);
+            transition: var(--transition);
+            z-index: 99;
+            opacity: 0;
+            visibility: hidden;
+        }
+        
+        .back-to-top.show {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .back-to-top:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 20px rgba(255,107,53,0.5);
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 1200px) {
+            .hero h2 {
+                font-size: 2.6rem;
+            }
+            
+            .section-header h2 {
+                font-size: 2.2rem;
+            }
+        }
+        
+        @media (max-width: 992px) {
+            .header-content {
+                flex-direction: row;
+            }
+            
+            nav ul {
+                display: none;
+                position: absolute;
+                top: 100%;
+                right: 0;
+                width: 100%;
+                background: linear-gradient(135deg, var(--primary-orange), var(--dark-orange));
+                flex-direction: column;
+                padding: 20px;
+                box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+                border-top: 1px solid rgba(255,255,255,0.1);
+            }
+            
+            nav ul.show {
+                display: flex;
+            }
+            
+            nav ul li {
+                margin: 8px 0;
+                width: 100%;
+                text-align: center;
+            }
+            
+            .mobile-menu {
+                display: flex;
+            }
+            
+            .hero {
+                padding: 120px 0 80px;
+                background-attachment: scroll;
+            }
+            
+            .hero h2 {
+                font-size: 2.3rem;
+            }
+            
+            .hero p {
+                font-size: 1.2rem;
+            }
+            
+            .btn {
+                padding: 16px 32px;
+                font-size: 1.1rem;
+            }
+            
+            .section {
+                padding: 80px 0;
+            }
+            
+            .section-header h2 {
+                font-size: 2rem;
+            }
+            
+            .resources-container {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .logo {
+                flex-direction: row;
+            }
+            
+            .logo-text h1 {
+                font-size: 1.5rem;
+            }
+            
+            .hero h2 {
+                font-size: 2rem;
+            }
+            
+            .hero p {
+                font-size: 1.1rem;
+            }
+            
+            .btn-group {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .btn {
+                width: 100%;
+                max-width: 320px;
+                text-align: center;
+            }
+            
+            .step {
+                flex-direction: column;
+                text-align: center;
+                gap: 20px;
+            }
+            
+            .step:hover {
+                transform: translateY(-10px);
+            }
+            
+            .emergency-content h2 {
+                font-size: 2.2rem;
+            }
+            
+            .emergency-content p {
+                font-size: 1.1rem;
+            }
+            
+            .emergency-btn {
+                padding: 18px 35px;
+                font-size: 1.2rem;
+            }
+            
+            .footer-content {
+                gap: 40px;
+            }
+            
+            .card, .prevention-card, .resource-card, .law-card {
+                padding: 25px 20px;
+            }
+            
+            .back-to-top {
+                bottom: 20px;
+                left: 20px;
+                width: 45px;
+                height: 45px;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .container {
+                width: 95%;
+            }
+            
+            .logo {
+                gap: 10px;
+            }
+            
+            .logo-icon {
+                width: 50px;
+                height: 50px;
+                font-size: 1.8rem;
+            }
+            
+            .logo-text h1 {
+                font-size: 1.3rem;
+            }
+            
+            .logo-text p {
+                font-size: 0.8rem;
+            }
+            
+            .hero {
+                padding: 100px 0 60px;
+            }
+            
+            .hero h2 {
+                font-size: 1.8rem;
+            }
+            
+            .hero p {
+                font-size: 1rem;
+                margin-bottom: 30px;
+            }
+            
+            .section {
+                padding: 60px 0;
+            }
+            
+            .section-header {
+                margin-bottom: 50px;
+            }
+            
+            .section-header h2 {
+                font-size: 1.8rem;
+            }
+            
+            .section-header p {
+                font-size: 1rem;
+            }
+            
+            .definition-cards, .prevention-cards, .laws-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .stats-grid {
+                grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            }
+            
+            .stat-card h3 {
+                font-size: 2.5rem;
+            }
+            
+            .emergency-content h2 {
+                font-size: 1.8rem;
+            }
+            
+            .emergency-content p {
+                font-size: 1rem;
+            }
+            
+            .emergency-btn {
+                padding: 16px 30px;
+                font-size: 1.1rem;
+            }
+            
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 35px;
+            }
+            
+            .campaign-note {
+                padding: 20px;
+                font-size: 1rem;
+            }
+        }
+        
+        @media (max-width: 380px) {
+            .hero h2 {
+                font-size: 1.6rem;
+            }
+            
+            .btn {
+                padding: 14px 25px;
+                font-size: 1rem;
+            }
+            
+            .section-header h2 {
+                font-size: 1.6rem;
+            }
+            
+            .card h3, .prevention-card h3, .resource-card h3, .law-card h3 {
+                font-size: 1.3rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <div class="logo-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <div class="logo-text">
+                        <h1>أمان رقمي</h1>
+                        <p>دعم ووقاية من الابتزاز الإلكتروني</p>
+                    </div>
+                </div>
+                
+                <div class="mobile-menu">
+                    <i class="fas fa-bars"></i>
+                </div>
+                
+                <nav>
+                    <ul id="nav-menu">
+                        <li><a href="#resources">الدلائل المساندة</a></li>
+                        <li><a href="#definition">مفهوم الابتزاز</a></li>
+                        <li><a href="#stats">الإحصائيات</a></li>
+                        <li><a href="#prevention">نصائح وقائية</a></li>
+                        <li><a href="#steps">خطوات المساعدة</a></li>
+                        <li><a href="#laws">القوانين</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h2>معاً نحو فضاء رقمي آمن للجميع</h2>
+                <p>نحن هنا لتقديم الدعم والمساندة في مواجهة الابتزاز الإلكتروني. لا تتردد في طلب المساعدة، فسلامتك وكرامتك تستحقان الحماية.</p>
+                <div class="btn-group">
+                    <a href="#steps" class="btn btn-primary">
+                        <i class="fas fa-life-ring"></i>
+                        احصل على المساعدة الآن
+                    </a>
+                    <a href="tel:065633404" class="btn btn-secondary">
+                        <i class="fas fa-phone-alt"></i>
+                        الاتصال بالطوارئ
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Resources Section -->
+    <section id="resources" class="resources-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>الدلائل والموارد المساندة</h2>
+                <p>موارد معتمدة من اليونيسف ووزارة الصحة ووزارة الشباب لدعم الصحة النفسية والعمل مع اليافعين</p>
+            </div>
+            
+            <div class="resources-container">
+                <div class="resource-card">
+                    <div class="resource-icon">
+                        <i class="fas fa-heartbeat"></i>
+                    </div>
+                    <h3>دليل العناية بالصحة النفسية</h3>
+                    <div class="resource-source">صادر عن اليونيسف ووزارة الشباب</div>
+                    <p>دليل شامل للعناية بالصحة النفسية لليافعين والشباب، يقدم إرشادات عملية للتعامل مع الضغوط النفسية والتحديات العاطفية.</p>
+                    <a href="https://www.moy.gov.jo/EBV4.0/Root_Storage/AR/%D8%AF%D9%84%D9%8A%D9%84_%D8%A7%D9%84%D8%B9%D9%86%D8%A7%D9%8A%D8%A9_%D8%A8%D8%A7%D9%84%D8%B5%D8%AD%D8%A9_%D8%A7%D9%84%D9%86%D9%81%D8%B3%D9%8A%D8%A9_%D9%84%D9%84%D9%8A%D8%A7%D9%81%D8%B9%D9%8A%D9%86_%D9%88%D8%A7%D9%84%D8%B4%D8%A8%D8%A7%D8%A8.pdf" target="_blank" class="resource-btn">
+                        <i class="fas fa-download"></i>
+                        تحميل الدليل
+                    </a>
+                </div>
+                
+                <div class="resource-card">
+                    <div class="resource-icon">
+                        <i class="fas fa-hands-helping"></i>
+                    </div>
+                    <h3>دليل عملي للعاملين مع اليافعين</h3>
+                    <div class="resource-source">صادر عن اليونيسف ووزارة الصحة</div>
+                    <p>دليل عملي مخصص للعاملين مع اليافعين والشباب، يقدم أدوات واستراتيجيات فعالة للدعم النفسي والاجتماعي.</p>
+                    <a href="https://www.moh.gov.jo/EBV4.0/Root_Storage/AR/IT/%D8%AF%D9%84%D9%8A%D9%84_%D8%B9%D9%85%D9%84%D9%8A_%D9%84%D9%84%D8%B9%D8%A7%D9%85%D9%84%D9%8A%D9%86_%D9%85%D8%B9_%D8%A7%D9%84%D9%8A%D8%A7%D9%81%D8%B9%D9%8A%D9%86_%D9%88%D8%A7%D9%84%D8%B4%D8%A8%D8%A7%D8%A8_%D8%A7%D9%84%D9%86%D8%B3%D8%AE%D8%A9_%D8%A7%D9%84%D9%86%D9%87%D8%A7%D8%A6%D9%8A%D8%A9.pdf" target="_blank" class="resource-btn">
+                        <i class="fas fa-download"></i>
+                        تحميل الدليل
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Definition Section -->
+    <section id="definition" class="section">
+        <div class="container">
+            <div class="section-header">
+                <h2>مفهوم جريمة الابتزاز الإلكتروني</h2>
+                <p>فهم الظاهرة الخطيرة التي تهدد أمننا الرقمي وكيفية مواجهتها</p>
+            </div>
+            
+            <div class="definition-cards">
+                <div class="card">
+                    <div class="card-icon">
+                        <i class="fas fa-exclamation-triangle"></i>
+                    </div>
+                    <h3>التعريف الأساسي</h3>
+                    <p>يُعرف الجرم الإلكتروني بأنه كل فعل ضار وغير قانوني يؤثر على الأجهزة أو المعلومات داخلها، ويقوم به المبتز بهدف الوصول إلى البيانات والبرامج الحاسوبية بغرض نسخها أو تغييرها أو حذفها أو تزويرها أو الحصول عليها بشكل غير مشروع.</p>
+                </div>
+                
+                <div class="card">
+                    <div class="card-icon">
+                        <i class="fas fa-bullhorn"></i>
+                    </div>
+                    <h3>الابتزاز الإلكتروني</h3>
+                    <p>هو عملية تهديد وترهيب للمتضرر/ة بنشر صور أو مقاطع أو تسريب معلومات سرية لإجبارها على دفع مبالغ مالية أو تنفيذ أعمال غير مشروعة لصالح المبتز.</p>
+                </div>
+                
+                <div class="card">
+                    <div class="card-icon">
+                        <i class="fas fa-brain"></i>
+                    </div>
+                    <h3>التعريف الشامل</h3>
+                    <p>الابتزاز الإلكتروني هو ضغط يُمارس باستخدام التكنولوجيا لإجبار شخص على القيام بعمل أو الامتناع عنه، من خلال تهديده بنشر بيانات أو معلومات تسيء لسمعته.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Statistics Section -->
+    <section id="stats" class="section" style="background-color: var(--light-orange);">
+        <div class="container">
+            <div class="section-header">
+                <h2>إحصائيات الجرائم الإلكترونية في الأردن</h2>
+                <p>أحدث البيانات والإحصائيات الصادرة عن مديرية الأمن العام</p>
+            </div>
+            
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <h3>16,027</h3>
+                    <p>إجمالي قضايا الجرائم الإلكترونية عام 2022</p>
+                </div>
+                <div class="stat-card">
+                    <h3>3,769</h3>
+                    <p>قضايا الذم والقدح والتحقير عبر الإنترنت</p>
+                </div>
+                <div class="stat-card">
+                    <h3>3,466</h3>
+                    <p>قضايا التهديد الإلكتروني المسجلة</p>
+                </div>
+                <div class="stat-card">
+                    <h3>2,115</h3>
+                    <p>قضايا الاختراق الإلكتروني</p>
+                </div>
+                <div class="stat-card">
+                    <h3>1,285</h3>
+                    <p>قضية ابتزاز إلكتروني مسجلة</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Prevention Section -->
+    <section id="prevention" class="section">
+        <div class="container">
+            <div class="section-header">
+                <h2>نصائح للوقاية والحماية</h2>
+                <p>إجراءات استباقية تساعدك في الحفاظ على أمنك الرقمي</p>
+            </div>
+            
+            <div class="prevention-cards">
+                <div class="prevention-card">
+                    <div class="prevention-icon">
+                        <i class="fas fa-lock"></i>
+                    </div>
+                    <h3>حماية الخصوصية</h3>
+                    <p>احرص على استخدام كلمات مرور قوية وتفعيل المصادقة الثنائية. لا تشارك معلوماتك الشخصية مع الغرباء عبر الإنترنت.</p>
+                </div>
+                
+                <div class="prevention-card">
+                    <div class="prevention-icon">
+                        <i class="fas fa-user-shield"></i>
+                    </div>
+                    <h3>التواصل الآمن</h3>
+                    <p>كن حذراً عند التفاعل مع حسابات غير معروفة. تحقق من هوية الأشخاص قبل مشاركة أي محتوى شخصي معهم.</p>
+                </div>
+                
+                <div class="prevention-card">
+                    <div class="prevention-icon">
+                        <i class="fas fa-eye"></i>
+                    </div>
+                    <h3>الوعي الرقمي</h3>
+                    <p>تعلم كيفية التعرف على محاولات الاحتيال والابتزاز. شارك المعرفة مع أفراد عائلتك وأصدقائك لزيادة الوعي المجتمعي.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Steps Section -->
+    <section id="steps" class="section" style="background-color: var(--light-bg);">
+        <div class="container">
+            <div class="section-header">
+                <h2>خطوات المساعدة الفورية</h2>
+                <p>إجراءات عملية يجب اتباعها فور التعرض لأي محاولة ابتزاز إلكتروني</p>
+            </div>
+            
+            <div class="steps-container">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <h3>الاحتفاظ بالأدلة</h3>
+                        <p>احتفظ بجميع الرسائل والصور والمحادثات التي تثبت محاولة الابتزاز. هذه الأدلة ستكون حاسمة في الإجراءات القانونية اللاحقة.</p>
+                    </div>
+                </div>
+                
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <h3>عدم الاستجابة للمطالب</h3>
+                        <p>لا تستجب لأي طلبات مالية أو غيرها من المطالب. الاستجابة تشجع المبتز على الاستمرار وزيادة الضغط.</p>
+                    </div>
+                </div>
+                
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <h3>الإبلاغ الفوري</h3>
+                        <p>تواصل فوراً مع الجهات المختصة. في الأردن، يمكنك الاتصال على رقم <strong>065633404</strong> للإبلاغ عن أي محاولة ابتزاز.</p>
+                    </div>
+                </div>
+                
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <div class="step-content">
+                        <h3>تعزيز الأمن الرقمي</h3>
+                        <p>قم بتغيير كلمات المرور وتعطيل الحسابات المشبوهة. استخدم تقنيات الحماية المتقدمة مثل المصادقة الثنائية.</p>
+                    </div>
+                </div>
+                
+                <div class="step">
+                    <div class="step-number">5</div>
+                    <div class="step-content">
+                        <h3>طلب الدعم النفسي</h3>
+                        <p>لا تتردد في طلب الدعم النفسي من المختصين. التحدث عن التجربة يساعد في التغلب على الآثار النفسية.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div style="text-align: center; margin-top: 50px;">
+                <p style="font-size: 1.2rem; background: linear-gradient(135deg, var(--light-orange), var(--accent-white)); padding: 25px; border-radius: var(--border-radius); border-right: 5px solid var(--primary-orange); box-shadow: var(--shadow);">
+                    <strong>التعامل السريع والمنهجي مع محاولات الابتزاز يقلل من الآثار السلبية ويزيد فرص حماية الحقوق ومحاسبة المتسببين.</strong>
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Laws Section -->
+    <section id="laws" class="section" style="background-color: var(--light-orange);">
+        <div class="container">
+            <div class="section-header">
+                <h2>القوانين الأردنية لمكافحة الابتزاز الإلكتروني</h2>
+                <p>الإطار التشريعي الذي يحمي المتضررين/ات ويجرّم المبتزين في الفضاء الرقمي</p>
+            </div>
+            
+            <div class="laws-grid">
+                <div class="law-card">
+                    <h3><i class="fas fa-shield-alt"></i> المادة الخاصة بالابتزاز والتهديد الإلكتروني</h3>
+                    <p>يعاقب من ابتز شخصًا عبر نظام معلومات أو منصة تواصل إلكترونية للحصول على منفعة أو إجباره على فعل أو امتناع.</p>
+                    <div class="penalty">
+                        العقوبة: الحبس تبدأ من سنة إذا كان التهديد أو الابتزاز بسيط، وقد تكون أشد إذا كان مصحوبًا بتهديد بجريمة أو إفشاء أمور شرفية.
+                    </div>
+                </div>
+                
+                <div class="law-card">
+                    <h3><i class="fas fa-gavel"></i> المادة 11 - الذم والقدح الإلكتروني</h3>
+                    <p>يعاقب كل من "أرسل أو أعد أو نشر بيانات أو معلومات عبر الشبكة المعلوماتية تتضمن ذمًا أو قدحًا أو تحقيرًا لشخص" بالحبس والغرامة.</p>
+                    <div class="penalty">
+                        العقوبة: الحبس من 3 أشهر إلى 3 سنوات، وغرامة من 100 إلى 2000 دينار.
+                    </div>
+                </div>
+                
+                <div class="law-card">
+                    <h3><i class="fas fa-comment-slash"></i> المادة 17 - خطاب الكراهية</h3>
+                    <p>تنص المادة في التعديل (قانون 2023) على عقوبة لمن ينشر "ما من شأنه إثارة الفتنة أو النعرات أو يستهدف السلم المجتمعي أو يدعو إلى الكراهية أو العنف أو يبرّره أو ازدراء الأديان".</p>
+                    <div class="penalty">
+                        العقوبة: الحبس من سنة إلى 3 سنوات + غرامة مالية لا تقل عن 5,000 دينار وقد تصل إلى 20,000 دينار.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Emergency Section -->
+    <section class="emergency-section">
+        <div class="container">
+            <div class="emergency-content">
+                <h2>لحظة التعرض للابتزاز.. تصرف بحكمة!</h2>
+                <p>اتصل فوراً بوحدة مكافحة الجرائم الإلكترونية في الأردن للحصول على المساعدة الفورية</p>
+                <a href="tel:065633404" class="emergency-btn">
+                    <i class="fas fa-phone-alt"></i>
+                    اتصل الآن: 065633404
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>معلومات الاتصال</h3>
+                    <p>وحدة مكافحة الجرائم الإلكترونية في الأردن</p>
+                    <a href="tel:065633404"><i class="fas fa-phone"></i> هاتف: 065633404</a>
+                    <a href="mailto:cybercrime@psd.gov.jo"><i class="fas fa-envelope"></i> البريد الإلكتروني</a>
+                    <p>للإجابة على جميع استفسارات المواطنين المتعلقة بالجرائم الإلكترونية</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>روابط سريعة</h3>
+                    <a href="#resources">الدلائل المساندة</a>
+                    <a href="#definition">مفهوم الابتزاز</a>
+                    <a href="#stats">الإحصائيات</a>
+                    <a href="#prevention">نصائح وقائية</a>
+                    <a href="#steps">خطوات المساعدة</a>
+                    <a href="#laws">القوانين</a>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>رسائل توعوية</h3>
+                    <p>"حياتك الرقمية مسؤوليتك... لا تسمح لأحد بابتزازك. بلّغ، اطلب المساعدة، ولا تستسلم للتهديد."</p>
+                    <p>"الابتزاز الإلكتروني جريمة... والإبلاغ عنه حماية لك ولغيرك."</p>
+                    <p>"لا تكن ضحية صمت.. تحدث واطلب المساعدة."</p>
+                </div>
+            </div>
+            
+            <div class="campaign-note">
+                <p>تم تصميم وتطوير هذا الموقع من قبل فتيات مخيم الزعتري كجزء من حملة الـ16 يوم لمناهضة العنف ضد المرأة</p>
+            </div>
+            
+            <div class="copyright">
+                <p>© 2025 أمان رقمي. جميع الحقوق محفوظة.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <a href="#" class="back-to-top" id="backToTop">
+        <i class="fas fa-chevron-up"></i>
+    </a>
+
+    <script>
+        // Mobile Menu Toggle
+        document.querySelector('.mobile-menu').addEventListener('click', function() {
+            document.getElementById('nav-menu').classList.toggle('show');
+        });
+        
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', function(event) {
+            const navMenu = document.getElementById('nav-menu');
+            const mobileMenu = document.querySelector('.mobile-menu');
+            
+            if (!navMenu.contains(event.target) && !mobileMenu.contains(event.target)) {
+                navMenu.classList.remove('show');
+            }
+        });
+        
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if(targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if(targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                    
+                    // Close mobile menu after clicking a link
+                    document.getElementById('nav-menu').classList.remove('show');
+                }
+            });
+        });
+        
+        // Back to Top Button
+        const backToTopButton = document.getElementById('backToTop');
+        
+        window.addEventListener('scroll', function() {
+            if (window.pageYOffset > 300) {
+                backToTopButton.classList.add('show');
+            } else {
+                backToTopButton.classList.remove('show');
+            }
+        });
+        
+        backToTopButton.addEventListener('click', function(e) {
+            e.preventDefault();
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+        
+        // Add animation on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+        
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+        
+        // Observe elements for animation
+        document.querySelectorAll('.card, .stat-card, .step, .prevention-card, .resource-card, .law-card').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(30px)';
+            el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(el);
+        });
+        
+        // Add loading animation
+        window.addEventListener('load', function() {
+            document.body.classList.add('loaded');
+        });
+    </script>
+</body>
+</html>
